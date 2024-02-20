@@ -10,8 +10,8 @@ pipeline{
     stage('docker build and push') {
       steps {
         sh '''
-        docker build -t heewon0915/cicdtest:green
-        docker push heewon0915/cicdtest:green
+        sudo docker build -t heewon0915/cicdtest:green
+        sudo docker push heewon0915/cicdtest:green
         '''
       }
     }
@@ -19,8 +19,8 @@ pipeline{
     stage('deploy kubernetes') {
       steps {
         sh '''
-        kubectl create deployment mypipe2 --image=heewon0915/cicdtest:green
-        kubectl expose deploy mypipe2 --type=LoadBalancer --port=80 --target-port=80
+        ansible master -m command -a 'kubectl create deploy myweb2 --image=heewon0915/cicdtest:green'
+        ansible master -m command -a 'kubectl expose deploy myweb2 --type=LoadBalancer --port=80 --target-port=80' 
         '''
       }
     }
