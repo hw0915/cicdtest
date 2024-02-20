@@ -19,8 +19,8 @@ pipeline{
     stage('deploy kubernetes') {
       steps {
         sh '''
-        ansible master -m command -a 'kubectl create deploy myweb2 --image=heewon0915/cicdtest:green'
-        ansible master -m command -a 'kubectl expose deploy myweb2 --type=LoadBalancer --port=80 --target-port=80' 
+        ansible master -m command -a 'kubectl create deploy mypline1 --image=heewon0915/cicdtest:green'
+        ansible master -m command -a 'kubectl expose deploy mypline1 --type=LoadBalancer --port=80 --target-port=80' 
         '''
       }
     }
